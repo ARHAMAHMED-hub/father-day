@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>🔒 Father's Day Surprise</title>
+  <style>
+    body { margin:0; background:#111; color:#eee; font-family:sans-serif;
+      display:flex;flex-direction:column;align-items:center;justify-content:center;
+      height:100vh; overflow:hidden; }
+    .scan-box {
+      padding:20px 30px; border:2px dashed #0f0; color:#0f0;
+      font-size:22px; margin-bottom:20px; animation:pulse 1s infinite alternate;
+    }
+    @keyframes pulse { from{opacity:0.4} to{opacity:1}}
+    #revealBtn {
+      background:#10b981; border:none; padding:14px 24px;
+      border-radius:8px; font-size:20px; color:#fff; cursor:pointer;
+    }
+    .message {
+      font-size:48px; font-weight:bold; color:#ff69b4;
+      margin-top:40px; opacity:0;
+      animation:popUp 1s ease-out forwards;
+    }
+    @keyframes popUp {
+      0% { transform: scale(0.2); opacity:0; }
+      100% { transform: scale(1); opacity:1; }
+    }
+    .confetti {
+      position:absolute; width:10px; height:10px;
+      animation:confetti-fall linear;
+    }
+    @keyframes confetti-fall {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(100vh); opacity:0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="scan-box">🔒 Scanning Link...</div>
+  <button id="revealBtn">Tap to Reveal</button>
+  <div class="message" id="message">💙 Happy Father's Day! 💙</div>
+
+  <script>
+    const btn = document.getElementById('revealBtn');
+    const msg = document.getElementById('message');
+    msg.style.display = 'none';
+    btn.addEventListener('click', () => {
+      btn.style.display = 'none';
+      msg.style.display = 'block';
+      document.querySelector('.scan-box').textContent = '🎉 Surprise!';
+      for (let i = 0; i < 100; i++) {
+        const c = document.createElement('div');
+        c.classList.add('confetti');
+        c.style.left = Math.random() * 100 + 'vw';
+        c.style.top = Math.random() * -50 + 'px';
+        c.style.background = `hsl(${Math.random()*360},100%,70%)`;
+        c.style.animationDuration = (Math.random()*2+3)+'s';
+        document.body.appendChild(c);
+        setTimeout(() => c.remove(), 5000);
+      }
+    });
+  </script>
+</body>
+</html>
